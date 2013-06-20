@@ -1,0 +1,8 @@
+// ==UserScript==
+// @ShortcutManager
+// @name Select the left tab
+// @namespace 9xHOE7kZoVb2
+// @key Alt+Shift+[
+// @include *
+// @execute SelectLeftTab([])
+// ==/UserScript==
