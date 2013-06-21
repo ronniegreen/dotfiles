@@ -8,7 +8,7 @@ DEFAULT_USER=mav
 # time that oh-my-zsh is loaded.
 ZSH_THEME="agnoster"
 
-alias vim="/Applications/MacVim.app/Contents/MacOS/Vim"
+# alias vim="/Applications/MacVim.app/Contents/MacOS/Vim"
 
 # ALIASES
 alias e="ls -lA"
@@ -67,7 +67,6 @@ plugins=(last-working-dir)
 plugins=(npm)
 plugins=(osx)
 
-source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/mav/gobin:/opt/bin:
@@ -78,3 +77,5 @@ export ANDROID_SDK_ROOT=/usr/local/opt/android-sdk
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 export PATH=$HOME/bin:$PATH
+
+source $ZSH/oh-my-zsh.sh
