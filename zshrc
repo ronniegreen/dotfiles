@@ -12,6 +12,7 @@ ZSH_THEME="agnoster"
 
 # ALIASES
 alias e="ls -lA"
+alias er="tree"
 alias j=".. && e"
 alias k="- && e"
 alias ev="vim ~/.vimrc"

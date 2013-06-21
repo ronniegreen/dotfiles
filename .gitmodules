@@ -1,6 +1,9 @@
 [submodule "oh-my-zsh"]
 	path = oh-my-zsh
-	url = https://github.com/robbyrussell/oh-my-zsh.git
+	url = git://github.com/robbyrussell/oh-my-zsh.git
 [submodule "janus/vim-sensible"]
 	path = janus/vim-sensible
-	url = https://github.com/tpope/vim-sensible.git
+	url = https://github.com/tpope/vim-sensible
+[submodule "janus/tabular"]
+	path = janus/tabular
+	url = https://github.com/godlygeek/tabular
