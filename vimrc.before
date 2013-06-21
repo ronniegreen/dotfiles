@@ -1,4 +1,7 @@
 
+
+" set t_Co=16
+
 let mapleader = ","
 
 " call janus#disable_plugin('nerdtree')

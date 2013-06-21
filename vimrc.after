@@ -14,15 +14,19 @@ set hlsearch
 " Ui and syntax {{{2
 
 syntax enable
-" set term=xterm-256color
-" let g:solarized_termcolors=256
-set t_Co=16
 
-if has('gui_running')
-  set background=light
-else
-  set background=dark
-endif
+" if has('gui_running')
+"   set background=light
+" else
+" endif
+
+
+
+set term=xterm-256color
+set t_Co=16
+let g:solarized_termcolors=16
+
+set background=dark
 colorscheme solarized
 
 set clipboard=unnamed
@@ -605,3 +609,9 @@ nmap <C-c>v :call <SID>Tmux_Vars()<CR>
 "     au BufwinEnter <buffer> call s:pushMarkdown()
 " aug END
 " " }}}
+
+" set term=screen-256color-bce
+" set t_Co=256
+" let g:solarized_termcolors=256
+" set background=dark
+" colorscheme default

@@ -40,15 +40,15 @@ plugins=(osx)
 # }}}
 # {{{ ALIASES
 
-# XXX TEMP
-alias kiji-schema=$KIJI_HOME/schema-shell/bin/kiji-schema-shell
-# /XXX TEMP
 
 # alias vim="/Applications/MacVim.app/Contents/MacOS/Vim"
 alias e="ls -lA"
 alias er="tree"
 alias j=".. && e"
 alias k="- && e"
+alias inst="sudo apt-get update && sudo apt-get install"
+alias serve="python -m SimpleHTTPServer"
+
 # {{{ DOTFILES
 
 alias ev="vim ~/.vimrc"
@@ -63,6 +63,7 @@ alias es="vim ~/.slate"
 # }}}
 # {{{ TMUX
 
+alias tmux='TERMINFO=/usr/share/terminfo/x/xterm-16color TERM=xterm-16color tmux -2'
 alias tm='tmux'
 alias tma='tmux attach'
 alias tmat='tmux attach -t'
@@ -76,21 +77,6 @@ alias tmk='tmux kill-session -t'
 # {{{ PATH
 
 # {{{ EXPORTS
-
-# XXX TEMP
-export DEV_TEMP=$HOME/Dev/temp
-export KIJI_HOME=$DEV_TEMP/kiji-bento-albacore
-export KIJI_MR_HOME=$KIJI_HOME/bin
-export EXPRESS_HOME=$KIJI_HOME/express
-export BENTO_CLUSTER_HOME=$KIJI_HOME/cluster
-export HADOOP_HOME=$KIJI_HOME/cluster/lib/hadoop-2.0.0-mr1-cdh4.1.2
-export HADOOP_CONF_DIR=$HADOOP_HOME/conf
-export HBASE_HOME=$KIJI_HOME/cluster/lib/hbase-0.92.1-cdh4.1.2
-export HBASE_CONF_DIR=$HBASE_HOME/conf
-# example
-export KIJI_CLASSPATH=$KIJI_HOME/examples/phonebook/lib
-# /XXX TEMP
-
 # }}}
 # {{{ PATHDIRS
 
@@ -111,16 +97,6 @@ pathdirs=(
   /usr/local/Library/ENV/4.3
   /usr/local/opt/autoconf/bin
 
-  $KIJI_HOME
-  $KIJI_MR_HOME
-  $KIJI_CLASSPATH
-  $EXPRESS_HOME
-  $BENTO_CLUSTER_HOME
-  $HADOOP_HOME
-  $HADOOP_CONF_DIR
-  $HBASE_HOME
-  $HBASE_CONF_DIR
-
 )
 
 for dir in $pathdirs; do
@@ -128,8 +104,13 @@ for dir in $pathdirs; do
     path+=$dir
   fi
 done
+
 # }}}
 
 # }}}
+
+if [ -x /usr/bin/dircolors ]; then
+  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+fi
 
 source $ZSH/oh-my-zsh.sh

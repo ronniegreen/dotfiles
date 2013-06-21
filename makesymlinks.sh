@@ -8,9 +8,12 @@
 
 dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
-files="bashrc vimrc vim janus slate tmux.conf zshrc oh-my-zsh"    # list of files/folders to symlink in homedir
+files="bashrc vimrc vimrc.after vimrc.before janus slate tmux.conf zshrc oh-my-zsh"    # list of files/folders to symlink in homedir
 
 ##########
+
+# create vim scratch and undo directories
+mkdir ~/.{tmp,undodir}
 
 # create dotfiles_old in homedir
 echo "Creating $olddir for backup of any existing dotfiles in ~"
