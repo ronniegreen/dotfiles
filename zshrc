@@ -1,62 +1,31 @@
-# Path to your oh-my-zsh configuration.
+
+# {{{ CONFIG
+
+# {{{ SETTINGS
+
 ZSH=$HOME/.oh-my-zsh
 DEFAULT_USER=mav
-
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
 ZSH_THEME="agnoster"
 
-# alias vim="/Applications/MacVim.app/Contents/MacOS/Vim"
-
-# ALIASES
-alias e="ls -lA"
-alias er="tree"
-alias j=".. && e"
-alias k="- && e"
-alias ev="vim ~/.vimrc"
-alias eb="vim ~/.bashrc"
-alias ez="vim ~/.zshrc"
-alias sz="source ~/.zshrc && print 'Sourced .zshrc'"
-alias et="vim ~/.tmux.conf"
-alias es="vim ~/.slate"
-
-alias tm='tmux'
-alias tma='tmux attach'
-alias tmas='tmux attach-session'
-alias tmat='tmux attach -t'
-alias tml='tmux list-sessions'
-alias tmn='tmux new-session -s'
-alias tmr='tmux rename-session'
-alias tmk='tmux kill-session -t'
-
 DISABLE_AUTO_TITLE=true
+COMPLETION_WAITING_DOTS="true"
 
-# When you open a file with vim, tmux sets the window name to the name of the file
-# vim() {                                                                                                                                                                                                                                                                                                                                                                    
-#   tmux rename-window "$*"                                                                                                                                                                                                                                                                                                                                                  
-#   command vim "$@"                                                                                                                                                                                                                                                                                                                                                         
-#   exit                                                                                                                                                                                                                                                                                                                                                                     
-# }
+export UPDATE_ZSH_DAYS=13
 
-# Set to this to use case-sensitive completion
-# CASE_SENSITIVE="true"
+# }}}
+# {{{ MODULES
 
-# Comment this out to disable bi-weekly auto-update checks
-# DISABLE_AUTO_UPDATE="true"
 
-# Uncomment to change how many often would you like to wait before auto-updates occur? (in days)
-# export UPDATE_ZSH_DAYS=13
+# }}}
+# {{{ OPTIONS
 
-# Uncomment following line if you want to disable colors in ls
-# DISABLE_LS_COLORS="true"
+setopt AUTO_CD
+setopt AUTO_PUSHD
 
-# Uncomment following line if you want to disable autosetting terminal title.
-# DISABLE_AUTO_TITLE="true"
+# }}}
 
-# Uncomment following line if you want red dots to be displayed while waiting for completion
-# COMPLETION_WAITING_DOTS="true"
+# }}}
+# {{{ PLUGINS
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -68,15 +37,99 @@ plugins=(last-working-dir)
 plugins=(npm)
 plugins=(osx)
 
+# }}}
+# {{{ ALIASES
 
-# Customize to your needs...
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/mav/gobin:/opt/bin:
+# XXX TEMP
+alias kiji-schema=$KIJI_HOME/schema-shell/bin/kiji-schema-shell
+# /XXX TEMP
 
-export ANDROID_SDK_ROOT=/usr/local/opt/android-sdk
-# export PATH=${PATH}:/Development/android-sdk-macosx/platform-tools:/Development/android-sdk-macosx/tools
+# alias vim="/Applications/MacVim.app/Contents/MacOS/Vim"
+alias e="ls -lA"
+alias er="tree"
+alias j=".. && e"
+alias k="- && e"
+# {{{ DOTFILES
 
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-export PATH=$HOME/bin:$PATH
+alias ev="vim ~/.vimrc"
+alias eva="vim ~/.vimrc.after"
+alias evb="vim ~/.vimrc.before"
+alias eb="vim ~/.bashrc"
+alias ez="vim ~/.zshrc"
+alias sz="source ~/.zshrc && print 'Sourced .zshrc'"
+alias et="vim ~/.tmux.conf"
+alias es="vim ~/.slate"
+
+# }}}
+# {{{ TMUX
+
+alias tm='tmux'
+alias tma='tmux attach'
+alias tmat='tmux attach -t'
+alias tml='tmux list-sessions'
+alias tmn='tmux new-session -s'
+alias tmk='tmux kill-session -t'
+
+# }}}
+
+# }}}
+# {{{ PATH
+
+# {{{ EXPORTS
+
+# XXX TEMP
+export DEV_TEMP=$HOME/Dev/temp
+export KIJI_HOME=$DEV_TEMP/kiji-bento-albacore
+export KIJI_MR_HOME=$KIJI_HOME/bin
+export EXPRESS_HOME=$KIJI_HOME/express
+export BENTO_CLUSTER_HOME=$KIJI_HOME/cluster
+export HADOOP_HOME=$KIJI_HOME/cluster/lib/hadoop-2.0.0-mr1-cdh4.1.2
+export HADOOP_CONF_DIR=$HADOOP_HOME/conf
+export HBASE_HOME=$KIJI_HOME/cluster/lib/hbase-0.92.1-cdh4.1.2
+export HBASE_CONF_DIR=$HBASE_HOME/conf
+# example
+export KIJI_CLASSPATH=$KIJI_HOME/examples/phonebook/lib
+# /XXX TEMP
+
+# }}}
+# {{{ PATHDIRS
+
+pathdirs=(
+
+  $HOME/bin
+  $HOME/gobin
+  $HOME/.rvm/bin
+
+  /bin
+  /sbin
+  /opt/bin
+
+  /usr/bin
+  /usr/sbin
+  /usr/local/bin
+  /usr/local/heroku/bin
+  /usr/local/Library/ENV/4.3
+  /usr/local/opt/autoconf/bin
+
+  $KIJI_HOME
+  $KIJI_MR_HOME
+  $KIJI_CLASSPATH
+  $EXPRESS_HOME
+  $BENTO_CLUSTER_HOME
+  $HADOOP_HOME
+  $HADOOP_CONF_DIR
+  $HBASE_HOME
+  $HBASE_CONF_DIR
+
+)
+
+for dir in $pathdirs; do
+  if [ -d $dir ]; then
+    path+=$dir
+  fi
+done
+# }}}
+
+# }}}
 
 source $ZSH/oh-my-zsh.sh

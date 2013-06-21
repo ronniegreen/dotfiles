@@ -1,0 +1,7 @@
+
+let mapleader = ","
+
+" call janus#disable_plugin('nerdtree')
+call janus#disable_plugin('supertab')
+call janus#disable_plugin('jslint')
+call janus#disable_plugin('command-t')

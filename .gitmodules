@@ -7,3 +7,30 @@
 [submodule "janus/tabular"]
 	path = janus/tabular
 	url = https://github.com/godlygeek/tabular
+[submodule "janus/tComment"]
+	path = janus/tComment
+	url = https://github.com/vim-scripts/tComment
+[submodule "janus/vim-coffee-script"]
+	path = janus/vim-coffee-script
+	url = https://github.com/kchmck/vim-coffee-script
+[submodule "janus/vim-colors-solarized"]
+	path = janus/vim-colors-solarized
+	url = https://github.com/altercation/vim-colors-solarized
+[submodule "janus/vim-jade"]
+	path = janus/vim-jade
+	url = https://github.com/digitaltoad/vim-jade
+[submodule "janus/vim-ls"]
+	path = janus/vim-ls
+	url = https://github.com/gkz/vim-ls
+[submodule "janus/vim-powerline"]
+	path = janus/vim-powerline
+	url = https://github.com/Lokaltog/vim-powerline
+[submodule "janus/vim-repeat"]
+	path = janus/vim-repeat
+	url = https://github.com/tpope/vim-repeat
+[submodule "janus/vim-stylus"]
+	path = janus/vim-stylus
+	url = https://github.com/wavded/vim-stylus
+[submodule "janus/vim-tmux"]
+	path = janus/vim-tmux
+	url = https://github.com/tsaleh/vim-tmux
