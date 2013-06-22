@@ -47,4 +47,4 @@ Simply follow the instructions at the [repo page](https://github.com/Valloric/Yo
     cd ~/dotfiles/janus/YouCompleteMe
     ./install.sh --clang-completer
 
-
+Last I checked, neither Ubuntu nor OS X ship vim at version 7.3.584 or greater, which is necessary to run YouCompleteMe. You'll to manually [build vim from source](https://github.com/Valloric/YouCompleteMe/wiki/Building-Vim-from-source) (it's super easy -- it's just more command punching).
