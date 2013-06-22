@@ -42,6 +42,7 @@ plugins=(osx)
 
 
 # alias vim="/Applications/MacVim.app/Contents/MacOS/Vim"
+# alias KP_Enter="ls"
 alias e="ls -lA"
 alias er="tree"
 alias j=".. && e"

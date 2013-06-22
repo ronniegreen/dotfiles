@@ -37,3 +37,6 @@
 [submodule "janus/vim-jade-handlebars"]
 	path = janus/vim-jade-handlebars
 	url = https://github.com/mvanasse/vim-jade-handlebars
+[submodule "janus/YouCompleteMe"]
+	path = janus/YouCompleteMe
+	url = https://github.com/Valloric/YouCompleteMe
