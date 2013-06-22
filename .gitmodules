@@ -34,3 +34,6 @@
 [submodule "janus/vim-tmux"]
 	path = janus/vim-tmux
 	url = https://github.com/tsaleh/vim-tmux
+[submodule "janus/vim-jade-handlebars"]
+	path = janus/vim-jade-handlebars
+	url = https://github.com/mvanasse/vim-jade-handlebars
