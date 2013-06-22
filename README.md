@@ -38,13 +38,11 @@ listed here.
 
 ### 4. Configure [vim autocompletion](https://github.com/Valloric/YouCompleteMe) (optional)
 
-This is for if you want *legit* autocompletion for vim, not a mediocre
-plugin or a hacky solution. It's not as quick to set up as a plugin, but it's definitely worth
-your time.
+This is for if you want *legit* autocompletion for vim, not a mediocre plugin or a hacky solution. It can take a bit to set up, but it's definitely worth your time.
 
-Simply follow the instructions at the [repo page](https://github.com/Valloric/YouCompleteMe), which should go something like this:
+Simply follow the instructions at the [repo page](https://github.com/Valloric/YouCompleteMe), which should start something like this:
 
     cd ~/dotfiles/janus/YouCompleteMe
     ./install.sh --clang-completer
 
-Last I checked, neither Ubuntu nor OS X ship vim at version 7.3.584 or greater, which is necessary to run YouCompleteMe. You'll to manually [build vim from source](https://github.com/Valloric/YouCompleteMe/wiki/Building-Vim-from-source) (it's super easy -- it's just more command punching).
+Last I checked, neither Ubuntu nor OS X ship vim at version 7.3.584 or greater, which is necessary to run YouCompleteMe. All you have to do is [build vim from source](https://github.com/Valloric/YouCompleteMe/wiki/Building-Vim-from-source). It's easy -- just more command punching.
