@@ -5,6 +5,10 @@ augroup filetype_vim
   autocm FileType vim setlocal foldmethod=marker
 augroup END
 
+augroup filetype_zsh
+  au! BufRead,BufNewFile,BufEnter *zshrc,*bashrc setlocal foldmethod=marker
+augroup END
+
 " Global behavior {{{1
 set incsearch
 set ignorecase
@@ -20,8 +24,6 @@ syntax enable
 " else
 " endif
 
-
-
 set term=xterm-256color
 set t_Co=16
 let g:solarized_termcolors=16
@@ -35,7 +37,9 @@ set hlsearch
 
 " au BufRead,BufNewFile *litcoffee set syntax=coffee
 au BufRead,BufNewFile Cakefile setf=coffee
-au BufRead,BufNewFile *_html set syntax=html
+au BufRead,BufNewFile *html setf html
+au BufRead,BufNewFile *.styl setf=stylus
+
 
 " " Crosshairs {{{2
 "   hi CursorLine   cterm=NONE ctermbg=darkgray guibg=darkred guifg=white
@@ -305,12 +309,12 @@ nnoremap <silent> <A-l> <C-w>>
   nnoremap <leader>evb :vsplit ~/.vimrc.before<cr>
   nnoremap <leader>sv :source ~/.vimrc<cr>
 " }}}
-" Quick line insertion / movement {{{
-  nnoremap <silent><C-k> m`:silent -g/\m^\s*$/d<CR>``:noh<CR>
-  nnoremap <silent><C-j> m`:silent +g/\m^\s*$/d<CR>``:noh<CR>
-  nnoremap <silent><C-S-j> :set paste<CR>m`o<Esc>``:set nopaste<CR>
-  nnoremap <silent><C-S-k> :set paste<CR>m`O<Esc>``:set nopaste<CR>
-" }}}
+" " Quick line insertion / movement {{{
+"   nnoremap <silent><C-k> m`:silent -g/\m^\s*$/d<CR>``:noh<CR>
+"   nnoremap <silent><C-j> m`:silent +g/\m^\s*$/d<CR>``:noh<CR>
+"   nnoremap <silent><C-S-j> :set paste<CR>m`o<Esc>``:set nopaste<CR>
+"   nnoremap <silent><C-S-k> :set paste<CR>m`O<Esc>``:set nopaste<CR>
+" " }}}
   " BASH/EMACS-like commands {{{
     cnoremap <C-a>  <Home>
     cnoremap <C-b>  <Left>

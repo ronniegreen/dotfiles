@@ -16,6 +16,9 @@
 [submodule "janus/vim-colors-solarized"]
 	path = janus/vim-colors-solarized
 	url = https://github.com/altercation/vim-colors-solarized
+[submodule "janus/vim-solarized-powerline"]
+  path = janus/vim-solarized-powerline
+  url = https://github.com/stephenmckinney/vim-solarized-powerline
 [submodule "janus/vim-jade"]
 	path = janus/vim-jade
 	url = https://github.com/digitaltoad/vim-jade
@@ -37,6 +40,3 @@
 [submodule "janus/vim-jade-handlebars"]
 	path = janus/vim-jade-handlebars
 	url = https://github.com/mvanasse/vim-jade-handlebars
-[submodule "janus/YouCompleteMe"]
-	path = janus/YouCompleteMe
-	url = https://github.com/Valloric/YouCompleteMe
