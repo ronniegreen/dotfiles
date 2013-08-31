@@ -19,11 +19,6 @@ set hlsearch
 
 syntax enable
 
-" if has('gui_running')
-"   set background=light
-" else
-" endif
-
 set term=xterm-256color
 set t_Co=16
 let g:solarized_termcolors=16
@@ -35,61 +30,54 @@ set clipboard=unnamed
 set number
 set hlsearch
 
-" au BufRead,BufNewFile *litcoffee set syntax=coffee
 au BufRead,BufNewFile Cakefile setf=coffee
-au BufRead,BufNewFile *html setf html
+au BufRead,BufNewFile *.html setf=html
+au BufRead,BufNewFile *.nghtml setf=html
 au BufRead,BufNewFile *.styl setf=stylus
-
-
-" " Crosshairs {{{2
-"   hi CursorLine   cterm=NONE ctermbg=darkgray guibg=darkred guifg=white
-"   hi CursorColumn cterm=NONE ctermbg=darkgray guibg=darkred guifg=white
-"   nnoremap <Leader>c :set cursorline! cursorcolumn!<CR>
 
 " Cursorline {{{2
 augroup CursorLine
   au!
-  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-  au WinLeave * setlocal nocursorline
+  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline cursorcolumn
+  au WinLeave * setlocal nocursorline nocursorcolumn
 augroup END
-
+" }}}
 " Undo persistence {{{2
   set undodir=~/.undodir
   set undofile
   set undolevels=1000 "maximum number of changes that can be undone
   set undoreload=10000 "maximum number of lines to save for undo on a buffer reload
-
-" Backup {{{2
+" }}}
+" Backup {{{
   set backup
-  set backupdir=~/.tmp
+  set backupdir=~/.tmp.vim
   set nowritebackup
   set noswapfile
-
+" }}}
 " Folds {{{2
 
-
-  " set ]z and [z go to find open folds
-  function! GoToOpenFold(direction)
-    if (a:direction == "next")
-      normal zj
-      let start = line('.')
-      while foldclosed(start) != -1
-        let start = start + 1
-      endwhile
-    else
-      normal zk
-      let start = line('.')
-      while foldclosed(start) != -1
-        let start = start - 1
-      endwhile
-    endif
-    call cursor(start, 0)
-  endfunction
-
-  " Automatically save and load folds
-  au BufWinLeave * silent! mkview
-  au BufWinEnter * silent! loadview 
-
+" {{{ Set ]z and [z go to find open folds
+function! GoToOpenFold(direction)
+  if (a:direction == "next")
+    normal zj
+    let start = line('.')
+    while foldclosed(start) != -1
+      let start = start + 1
+    endwhile
+  else
+    normal zk
+    let start = line('.')
+    while foldclosed(start) != -1
+      let start = start - 1
+    endwhile
+  endif
+  call cursor(start, 0)
+endfunction
+" }}}
+" {{{ Automatically save and load folds
+au BufWinLeave * silent! mkview
+au BufWinEnter * silent! loadview 
+" }}}
 " Watch for changes {{{
 set wrap
 " set linebreak
@@ -274,6 +262,7 @@ execute WatchForChanges("*",autoreadargs)
 set autoread
 au BufEnter,BufWinEnter,CursorHold filename :checktime
 " }}}
+
 " }}}
 " Global mappings {{{1
 
@@ -290,13 +279,13 @@ vnoremap < <gv
 
 nnoremap Q @q
 
+inoremap <C-h> <left>
+inoremap <C-j> <down>
+inoremap <C-k> <up>
+inoremap <C-l> <right>
 
-" Tabularize {{{
-if exists(":Tabularize")
-  nmap <Leader>a :Tabularize /
-  vmap <Leader>a :Tabularize /
-endif
-" }}}
+unmap <leader>md
+
 " Buffers {{{
 nnoremap <silent> <A-h> <C-w><
 nnoremap <silent> <A-j> <C-w>-
@@ -309,12 +298,6 @@ nnoremap <silent> <A-l> <C-w>>
   nnoremap <leader>evb :vsplit ~/.vimrc.before<cr>
   nnoremap <leader>sv :source ~/.vimrc<cr>
 " }}}
-" " Quick line insertion / movement {{{
-"   nnoremap <silent><C-k> m`:silent -g/\m^\s*$/d<CR>``:noh<CR>
-"   nnoremap <silent><C-j> m`:silent +g/\m^\s*$/d<CR>``:noh<CR>
-"   nnoremap <silent><C-S-j> :set paste<CR>m`o<Esc>``:set nopaste<CR>
-"   nnoremap <silent><C-S-k> :set paste<CR>m`O<Esc>``:set nopaste<CR>
-" " }}}
   " BASH/EMACS-like commands {{{
     cnoremap <C-a>  <Home>
     cnoremap <C-b>  <Left>
@@ -328,6 +311,18 @@ nnoremap <silent> <A-l> <C-w>>
     cnoremap <Esc>d <S-right><Delete>
     cnoremap <C-g>  <C-c>
   " }}}
+" {{{ Nerdtree
+if exists(":NERDTree")
+  nnoremap <silent> <leader>m :let g:NERDTreeWinPos = "left"<cr>:NERDTreeToggle<cr>
+  nnoremap <silent> <leader>. :let g:NERDTreeWinPos = "right"<cr>:NERDTreeToggle<cr>
+endif
+" }}}
+" Tabularize {{{
+if exists(":Tabularize")
+  nmap <Leader>a :Tabularize /
+  vmap <Leader>a :Tabularize /
+endif
+" }}}
 " Misc {{{
 " Camel case
   nnoremap <c-t> /[A-Z]<return>
@@ -345,8 +340,6 @@ filetype plugin on
 filetype indent on
 
 " Javascript {{{
-  nnoremap <leader>cc iconsole.log <Esc>a
-  inoremap <leader>cc console.log <Esc>a
 " }}}
 " Coffeetags {{{2
 " CoffeeTags with variables
@@ -387,40 +380,17 @@ endif
 " Livescript {{{2
   " command! LSrid 
 
-  au BufWritePost *.ls
-  \  silent execute '!for j in _*.js; if [[ -e ${${j:r}/_}.ls ]]; then; print $j; else; rm $j; fi; cp -f % _% && lsc -cb _% && rm _%;' | redraw!
+  " au BufWritePost *.ls
+  " \  silent execute '!for j in _*.js; if [[ -e ${${j:r}/_}.ls ]]; then; print $j; else; rm $j; fi; cp -f % _% && lsc -cb _% && rm _%;' | redraw!
 
   " au BufWritePost *.ls silent execute "!lsc -cb *.ls | rm _*.js" | redraw!
 
-  au BufNewFile,BufReadPost *.ls setl foldmethod=indent nofoldenable shiftwidth=2 expandtab foldlevel=20 foldlevelstart=20
+  " au BufNewFile,BufReadPost *.ls setl foldmethod=indent nofoldenable shiftwidth=2 expandtab foldlevel=20 foldlevelstart=20
 
-  " function! LSFolds()
-  "   let thisline = getline(v:lnum)
-  "   if match(thisline, '^###') >= 0
-  "     return ">1"
-  "   else
-  "     return "="
-  "   endif
-  "   return "1"
-  " endfunction
-
-  " function! FoldIt()
-  "   setfiletype ls
-  "   setlocal foldmethod=expr
-  "   setlocal foldexpr=LSFolds()
-  " endfunction
-
-
-  " augroup ls_ft
-  "   autocmd!
-  "   au BufNewFile,BufReadPost *.ls call FoldIt()
-  " augroup END
-
-
-  vnoremap <leader>lc :LiveScriptCompile 30<cr>
-  nnoremap <leader>lr :LiveScriptRun<cr>
-  nnoremap <leader>lw :LiveScriptCompile watch vert<cr>
-  nnoremap <leader>lu :LiveScriptCompile unwatch vert<cr>
+  " vnoremap <leader>lc :LiveScriptCompile 30<cr>
+  " nnoremap <leader>lr :LiveScriptRun<cr>
+  " nnoremap <leader>lw :LiveScriptCompile watch vert<cr>
+  " nnoremap <leader>lu :LiveScriptCompile unwatch vert<cr>
 
 " Folds {{{
 set foldlevelstart=0
@@ -496,124 +466,5 @@ nmap <C-c><C-c> vip<C-c><C-c>
 nmap <C-c>v :call <SID>Tmux_Vars()<CR>
 " }}}
 " }}}
-
 " }}}
 
-" " Markdown {{{
-" " # Configuration
-" if !exists('g:instant_markdown_slow')
-"     let g:instant_markdown_slow = 0
-" endif
-" 
-" " # Utility Functions
-" " Simple system wrapper that ignores empty second args
-" function! s:system(cmd, stdin)
-"     if strlen(a:stdin) == 0
-"         call system(a:cmd)
-"     else
-"         call system(a:cmd, a:stdin)
-"     endif
-" endfu
-" 
-" function! s:refreshView()
-"     let bufnr = expand('<bufnr>')
-"     call s:system("curl -X PUT -T - http://localhost:8090/ &>/dev/null &",
-"                 \ s:bufGetContents(bufnr))
-" endfu
-" 
-" function! s:startDaemon(initialMD)
-"     call s:system("instant-markdown-d &>/dev/null &", a:initialMD)
-" endfu
-" 
-" function! s:initDict()
-"     if !exists('s:buffers')
-"         let s:buffers = {}
-"     endif
-" endfu
-" 
-" function! s:pushBuffer(bufnr)
-"     call s:initDict()
-"     let s:buffers[a:bufnr] = 1
-" endfu
-" 
-" function! s:popBuffer(bufnr)
-"     call s:initDict()
-"     call remove(s:buffers, a:bufnr)
-" endfu
-" 
-" function! s:killDaemon()
-"     call system("curl -s -X DELETE http://localhost:8090/ &>/dev/null &")
-" endfu
-" 
-" function! s:bufGetContents(bufnr)
-"   return join(getbufline(a:bufnr, 1, "$"), "\n")
-" endfu
-" 
-" " I really, really hope there's a better way to do this.
-" fu! s:myBufNr()
-"     return str2nr(expand('<abuf>'))
-" endfu
-" 
-" " # Functions called by autocmds
-" "
-" " ## push a new Markdown buffer into the system.
-" "
-" " 1. Track it so we know when to garbage collect the daemon
-" " 2. Start daemon if we're on the first MD buffer.
-" " 3. Initialize changedtickLast, possibly needlessly(?)
-" fu! s:pushMarkdown()
-"     let bufnr = s:myBufNr()
-"     call s:initDict()
-"     if len(s:buffers) == 0
-"         call s:startDaemon(s:bufGetContents(bufnr))
-"     endif
-"     call s:pushBuffer(bufnr)
-"     let b:changedtickLast = b:changedtick
-" endfu
-" 
-" " ## pop a Markdown buffer
-" "
-" " 1. Pop the buffer reference
-" " 2. Garbage collection
-" "     * daemon
-" "     * autocmds
-" fu! s:popMarkdown()
-"     let bufnr = s:myBufNr()
-"     silent au! instant-markdown * <buffer=abuf>
-"     call s:popBuffer(bufnr)
-"     if len(s:buffers) == 0
-"         call s:killDaemon()
-"     endif
-" endfu
-" 
-" " ## Refresh if there's something new worth showing
-" "
-" " 'All things in moderation'
-" fu! s:temperedRefresh()
-"     if !exists('b:changedtickLast')
-"         let b:changedtickLast = b:changedtick
-"     elseif b:changedtickLast != b:changedtick
-"         let b:changedtickLast = b:changedtick
-"         call s:refreshView()
-"     endif
-" endfu
-" 
-" " # Define the autocmds "
-" aug instant-markdown
-"     au! * <buffer>
-"     au BufEnter <buffer> call s:refreshView()
-"     if g:instant_markdown_slow
-"         au CursorHold,BufWrite,InsertLeave <buffer> call s:temperedRefresh()
-"     else
-"         au CursorHold,CursorHoldI,CursorMoved,CursorMovedI <buffer> call s:temperedRefresh()
-"     endif
-"     au BufWinLeave <buffer> call s:popMarkdown()
-"     au BufwinEnter <buffer> call s:pushMarkdown()
-" aug END
-" " }}}
-
-" set term=screen-256color-bce
-" set t_Co=256
-" let g:solarized_termcolors=256
-" set background=dark
-" colorscheme default

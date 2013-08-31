@@ -1,10 +1,30 @@
+# Dependencies documentation block
 snippet /**M
 	/**
 	 * Module dependencies.
 	 */
 	${1}
+# Short documentation block
 snippet /*
 	/**
 	 * ${1:description}
 	 */
 	${2}
+# Require
+snippet req
+	require("${1}")${2}
+# Describe
+snippet des
+	describe("${1:something}", function(){
+		it("${2:should do some stuff}", function(done){
+			${3:something.should.fucking.work}
+			done();
+		})
+	})
+# Function simple
+snippet fu
+	function (${1}){
+		${2}
+	}
+snippet var
+	var ${1:name} = ${2};
